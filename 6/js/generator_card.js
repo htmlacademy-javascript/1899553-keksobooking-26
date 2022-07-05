@@ -1,8 +1,8 @@
 import { createObjects } from './data.js';
 
-const cardList = document.querySelector('#map-canvas');
-const pattern = document.querySelector('#card').content.querySelector('.popup');
-const typeOfHousing = {
+const CardList = document.querySelector('#map-canvas');
+const Pattern = document.querySelector('#card').content.querySelector('.popup');
+const TypeOfHousing = {
   'flat': 'Квартира',
   'bungalow': 'Бунгало',
   'house': 'Дом',
@@ -12,34 +12,34 @@ const typeOfHousing = {
 
 createObjects().forEach((arrayOfObjects) => {
 
-  const card = pattern.cloneNode(true);
-  const featuresRandom = arrayOfObjects.offer.features;
-  const popupFeatures = card.querySelector('.popup__features');
-  const popupFeature = popupFeatures.querySelectorAll('.popup__feature');
-  const photosRandom = arrayOfObjects.offer.photos;
-  const photos = card.querySelector('.popup__photos');
-  const photo = photos.querySelector('.popup__photo');
-  photosRandom.forEach((picture) => {
-    const photoClone = photo.cloneNode(true);
-    photoClone.src = picture;
-    photos.appendChild(photoClone);
+  const Card = Pattern.cloneNode(true);
+  const FeaturesRandom = arrayOfObjects.offer.features;
+  const PopupFeatures = Card.querySelector('.popup__features');
+  const PopupFeature = PopupFeatures.querySelectorAll('.popup__feature');
+  const PhotosRandom = arrayOfObjects.offer.photos;
+  const Photos = Card.querySelector('.popup__photos');
+  const Photo = Photos.querySelector('.popup__photo');
+  PhotosRandom.forEach((picture) => {
+    const PhotoClone = Photo.cloneNode(true);
+    PhotoClone.src = picture;
+    Photos.appendChild(PhotoClone);
   });
   photo.remove('popup__photo');
-  if (!photosRandom.length) { photos.classList.add('hidden'); }
-  popupFeature.forEach((popupFeatureItem) => {
-    const isReal = featuresRandom.some((feature) => popupFeatureItem.classList.contains(`popup__feature--${feature}`));
+  if (!PhotosRandom.length) { Photos.classList.add('hidden'); }
+  PopupFeature.forEach((popupFeatureItem) => {
+    const isReal = FeaturesRandom.some((feature) => popupFeatureItem.classList.contains(`popup__feature--${feature}`));
     if (!isReal) {
       popupFeatureItem.remove();
     }
-    if (!featuresRandom.length) { popupFeatures.classList.add('hidden'); }
+    if (!FeaturesRandom.length) { PopupFeatures.classList.add('hidden'); }
   });
-  card.querySelector('.popup__title').textContent = arrayOfObjects.offer.title;
-  card.querySelector('.popup__text--address').textContent = arrayOfObjects.offer.address;
-  card.querySelector('.popup__text--price').textContent = `${arrayOfObjects.offer.price} ₽/ночь`;
-  card.querySelector('.popup__type').textContent = typeOfHousing[arrayOfObjects.offer.type];
-  card.querySelector('.popup__text--capacity').textContent = `${arrayOfObjects.offer.rooms} комнаты для ${arrayOfObjects.offer.guests} гостей`;
-  card.querySelector('.popup__text--time').textContent = `Заезд после ${arrayOfObjects.offer.checkin}, выезд до ${arrayOfObjects.offer.checkout}`;
-  card.querySelector('.popup__description').textContent = arrayOfObjects.offer.description;
-  card.querySelector('.popup__avatar').src = arrayOfObjects.author.avatar;
-  cardList.appendChild(card);
-};
+  Card.querySelector('.popup__title').textContent = arrayOfObjects.offer.title;
+  Card.querySelector('.popup__text--address').textContent = arrayOfObjects.offer.address;
+  Card.querySelector('.popup__text--price').textContent = `${arrayOfObjects.offer.price} ₽/ночь`;
+  Card.querySelector('.popup__type').textContent = TypeOfHousing[arrayOfObjects.offer.type];
+  Card.querySelector('.popup__text--capacity').textContent = `${arrayOfObjects.offer.rooms} комнаты для ${arrayOfObjects.offer.guests} гостей`;
+  Card.querySelector('.popup__text--time').textContent = `Заезд после ${arrayOfObjects.offer.checkin}, выезд до ${arrayOfObjects.offer.checkout}`;
+  Card.querySelector('.popup__description').textContent = arrayOfObjects.offer.description;
+  Card.querySelector('.popup__avatar').src = arrayOfObjects.author.avatar;
+  CardList.appendChild(Card);
+});
