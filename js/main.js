@@ -1,5 +1,5 @@
 import {createObjects} from './data.js';
-import './popup.js'
+import './generator_card.js'
 createObjects();
 
 
