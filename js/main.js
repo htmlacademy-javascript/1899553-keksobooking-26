@@ -1,4 +1,3 @@
-import {createObjects} from './data.js';
-createObjects();
+import { drawObjects } from './generator_card.js';
 
-
+drawObjects(createObjects());
