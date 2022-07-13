@@ -14,10 +14,10 @@ export const drawObjects = (cards) => {
 
   cards.forEach((card) => {
     const cardtemplate = pattern.cloneNode(true);
-    const featuresRandom = arrayOfObjects.offer.features;
+    const featuresRandom = card.offer.features;
     const popupFeatures = cardtemplate.querySelector('.popup__features');
     const popupFeature = popupFeatures.querySelectorAll('.popup__feature');
-    const photosRandom = arrayOfObjects.offer.photos;
+    const photosRandom = card.offer.photos;
     const photos = cardtemplate.querySelector('.popup__photos');
     const photo = photos.querySelector('.popup__photo');
     photosRandom.forEach((picture) => {
@@ -34,14 +34,14 @@ export const drawObjects = (cards) => {
       }
       if (!featuresRandom.length) { popupFeatures.classList.add('hidden'); }
     });
-    cardtemplate.querySelector('.popup__title').textContent = arrayOfObjects.offer.title;
-    cardtemplate.querySelector('.popup__text--address').textContent = arrayOfObjects.offer.address;
-    cardtemplate.querySelector('.popup__text--price').textContent = `${arrayOfObjects.offer.price} ₽/ночь`;
-    cardtemplate.querySelector('.popup__type').textContent = TypeOfHousing[arrayOfObjects.offer.type];
-    cardtemplate.querySelector('.popup__text--capacity').textContent = `${arrayOfObjects.offer.rooms} комнаты для ${arrayOfObjects.offer.guests} гостей`;
-    cardtemplate.querySelector('.popup__text--time').textContent = `Заезд после ${arrayOfObjects.offer.checkin}, выезд до ${arrayOfObjects.offer.checkout}`;
-    cardtemplate.querySelector('.popup__description').textContent = arrayOfObjects.offer.description;
-    cardtemplate.querySelector('.popup__avatar').src = arrayOfObjects.author.avatar;
+    cardtemplate.querySelector('.popup__title').textContent = card.offer.title;
+    cardtemplate.querySelector('.popup__text--address').textContent = card.offer.address;
+    cardtemplate.querySelector('.popup__text--price').textContent = `${card.offer.price} ₽/ночь`;
+    cardtemplate.querySelector('.popup__type').textContent = TypeOfHousing[card.offer.type];
+    cardtemplate.querySelector('.popup__text--capacity').textContent = `${card.offer.rooms} комнаты для ${card.offer.guests} гостей`;
+    cardtemplate.querySelector('.popup__text--time').textContent = `Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}`;
+    cardtemplate.querySelector('.popup__description').textContent = card.offer.description;
+    cardtemplate.querySelector('.popup__avatar').src = card.author.avatar;
     cardList.appendChild(cardtemplate);
   });
 }

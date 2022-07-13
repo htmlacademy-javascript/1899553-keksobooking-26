@@ -29,4 +29,4 @@ const getRandomLength = function (array) {
   return array.slice(0, lengthArray);
 };
 
-export {getRandomInRange,getRandomFloat, getRandomElement, getRandomLength};
+export { getRandomInRange, getRandomFloat, getRandomElement, getRandomLength };
