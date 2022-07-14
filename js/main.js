@@ -1,5 +1,4 @@
-import {createObjects} from './data.js';
+import { drawObjects } from './generator_card.js';
 import './form.js';
-createObjects();
 
-
+drawObjects(createObjects());
