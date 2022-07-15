@@ -3,7 +3,7 @@ const advertFormElements = advertForm.children;
 const mapFilterForm = document.querySelector('.map__filters');
 const mapFilterFormElements = mapFilterForm.children;
 
-const toInactiveForm = function () {
+export const toInactiveForm = function () {
   advertForm.classList.add('ad-form--disabled');
   for (const element of advertFormElements) {
     element.disabled = true;
@@ -13,7 +13,7 @@ const toInactiveForm = function () {
     element.disabled = true;
   }
 };
-toInactiveForm();
+
 
 const toActiveForm = function () {
   advertForm.classList.remove('ad-form--disabled');
