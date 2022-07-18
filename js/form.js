@@ -25,3 +25,85 @@ const toActiveForm = function () {
     element.disabled = false;
   }
 };
+
+const pristine = new pristine(advertForm, {
+  classTo: 'ad-form__element',
+  errorTextParent: 'ad-form__element',
+  errorTextClass: 'ad-form__error-text',
+});
+
+
+function validateTitleNotice(value) {
+  return value.length >= 30 && value.length <= 100;
+}
+
+pristine.addValidator(advertForm.querySelector('#title'), validateTitleNotice, 'Объявление от 30 до 100 символов');
+
+
+const price = advertForm.querySelector('#price');
+const TypeOfHousing = document.querySelector('#type');
+const TypeOfHousingPrice = {
+  palace: 10000,
+  flat: 1000,
+  house: 5000,
+  bungalow: 0,
+  hotel: 3000
+};
+const maxPrice = {
+  palace: 100000,
+  flat: 100000,
+  house: 100000,
+  bungalow: 100000,
+  hotel: 100000
+};
+TypeOfHousing.addEventChecker('change', () => {
+  price.placeholder = TypeOfHousingPrice[TypeOfHousing.value];
+  price.min = TypeOfHousingPrice[TypeOfHousing.value];
+  price.value = '';
+});
+
+function validatePrice(value) {
+  return value <= maxPrice[TypeOfHousing.value] && value >= TypeOfHousingPrice[TypeOfHousing.value];
+}
+function getPriceErrorReport() {
+  return `не менее ${TypeOfHousingPrice[TypeOfHousing.value]} и не более ${maxPrice[TypeOfHousing.value]}`;
+}
+pristine.addValidator(price, validatePrice, getPriceErrorReport);
+
+
+const roomNumber = advertForm.querySelector('#room_number');
+const capacityGuests = advertForm.querySelector('#capacity');
+const possibleCapacity = {
+  '1': ['1'],
+  '2': ['1', '2'],
+  '3': ['1', '2', '3'],
+  '100': ['0']
+};
+
+function validateCapacity() {
+  return possibleCapacity[roomNumber.value].includes(capacityGuests.value);
+}
+
+function getCapacityErrorReport() {
+  if (roomNumber.value === '1') {
+    return `${roomNumber.value} команта для 1 гостя`;
+  }
+  if (roomNumber.value === '2') {
+    return `${roomNumber.value} команты для 1 или 2 гостей`;
+  }
+  if (roomNumber.value === '3') {
+    return `${roomNumber.value} команты от 1 до 3 гостей`;
+  }
+  if (roomNumber.value === '100') {
+    return `${roomNumber.value} комант не для гостей`;
+  }
+}
+
+pristine.addValidator(roomNumber, validateCapacity);
+pristine.addValidator(capacityGuests, validateCapacity, getCapacityErrorReport);
+
+
+advertForm.addEventChecker('submit', (evt) => {
+  evt.preventDefault();
+  pristine.validate();
+});
