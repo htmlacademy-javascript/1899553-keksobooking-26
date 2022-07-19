@@ -41,8 +41,8 @@ pristine.addValidator(advertForm.querySelector('#title'), validateTitleNotice, '
 
 
 const price = advertForm.querySelector('#price');
-const TypeOfHousing = document.querySelector('#type');
-const TypeOfHousingPrice = {
+const typeOfHousing = document.querySelector('#type');
+const typeOfHousingPrice = {
   palace: 10000,
   flat: 1000,
   house: 5000,
@@ -56,17 +56,17 @@ const maxPrice = {
   bungalow: 100000,
   hotel: 100000
 };
-TypeOfHousing.addEventChecker('change', () => {
-  price.placeholder = TypeOfHousingPrice[TypeOfHousing.value];
-  price.min = TypeOfHousingPrice[TypeOfHousing.value];
+tpeOfHousing.addEventChecker('change', () => {
+  price.placeholder = typeOfHousingPrice[typeOfHousing.value];
+  price.min = typeOfHousingPrice[typeOfHousing.value];
   price.value = '';
 });
 
 function validatePrice(value) {
-  return value <= maxPrice[TypeOfHousing.value] && value >= TypeOfHousingPrice[TypeOfHousing.value];
+  return value <= maxPrice[typeOfHousing.value] && value >= typeOfHousingPrice[typeOfHousing.value];
 }
 function getPriceErrorReport() {
-  return `не менее ${TypeOfHousingPrice[TypeOfHousing.value]} и не более ${maxPrice[TypeOfHousing.value]}`;
+  return `не менее ${typeOfHousingPrice[typeOfHousing.value]} и не более ${maxPrice[typeOfHousing.value]}`;
 }
 pristine.addValidator(price, validatePrice, getPriceErrorReport);
 
