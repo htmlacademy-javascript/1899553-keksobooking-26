@@ -56,7 +56,7 @@ const maxPrice = {
   bungalow: 100000,
   hotel: 100000
 };
-tpeOfHousing.addEventChecker('change', () => {
+typeOfHousing.addEventListener('change', () => {
   price.placeholder = typeOfHousingPrice[typeOfHousing.value];
   price.min = typeOfHousingPrice[typeOfHousing.value];
   price.value = '';
@@ -103,7 +103,7 @@ pristine.addValidator(roomNumber, validateCapacity);
 pristine.addValidator(capacityGuests, validateCapacity, getCapacityErrorReport);
 
 
-advertForm.addEventChecker('submit', (evt) => {
+advertForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   pristine.validate();
 });
