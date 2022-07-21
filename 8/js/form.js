@@ -15,7 +15,7 @@ export const toInactiveForm = function () {
 };
 
 
-const toActiveForm = function () {
+export const toActiveForm = function () {
   advertForm.classList.remove('ad-form--disabled');
   for (const element of advertFormElements) {
     element.disabled = false;
@@ -26,12 +26,11 @@ const toActiveForm = function () {
   }
 };
 
-const pristine = new pristine(advertForm, {
+const pristine = new Pristine(advertForm, {
   classTo: 'ad-form__element',
   errorTextParent: 'ad-form__element',
   errorTextClass: 'ad-form__error-text',
 });
-
 
 function validateTitleNotice(value) {
   return value.length >= 30 && value.length <= 100;
@@ -56,6 +55,7 @@ const maxPrice = {
   bungalow: 100000,
   hotel: 100000
 };
+
 typeOfHousing.addEventListener('change', () => {
   price.placeholder = typeOfHousingPrice[typeOfHousing.value];
   price.min = typeOfHousingPrice[typeOfHousing.value];
@@ -101,6 +101,7 @@ function getCapacityErrorReport() {
 
 pristine.addValidator(roomNumber, validateCapacity);
 pristine.addValidator(capacityGuests, validateCapacity, getCapacityErrorReport);
+
 
 
 advertForm.addEventListener('submit', (evt) => {
