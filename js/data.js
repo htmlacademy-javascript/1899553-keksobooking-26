@@ -1,4 +1,4 @@
-import {getRandomInRange,getRandomFloat, getRandomElement, getRandomLength} from './util.js';
+import { getRandomInRange, getRandomFloat, getRandomElement, getRandomLength } from './util.js';
 
 const TITLE = ['Рядом с метро', 'В центре города', 'Тихий район', 'Рядом с парком'];
 const TYPE = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
@@ -8,6 +8,22 @@ const DESCRIPTION = ['отличный вид', 'светлая квартира
 const PHOTOS = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
 
 let i = 0;
+
+const getFeatures = () => {
+  const features = [];
+
+  for (let j = 0; j < getRandomInRange(1, 6); j++) {
+    let feature = getRandomElement(FEATURES);
+
+    while (features.includes(feature)) {
+      feature = getRandomElement(FEATURES);
+    }
+
+    features.push(feature);
+  }
+
+  return features;
+};
 
 const createObject = function () {
   i++;
@@ -26,14 +42,14 @@ const createObject = function () {
     author: AUTHOR,
     offer: {
       title: getRandomElement(TITLE),
-      address:`${LOCATION.lat}, ${LOCATION.lng}`,
+      address: `${LOCATION.lat}, ${LOCATION.lng}`,
       price: PRICE,
       type: getRandomElement(TYPE),
       rooms: ROOMS,
       guests: GUESTS,
       checkin: getRandomElement(CHECKIN),
       checkout: getRandomElement(CHECKIN),
-      features: getRandomElement(FEATURES),
+      features: getFeatures(),
       description: getRandomElement(DESCRIPTION),
       photos: getRandomLength(PHOTOS),
     },
@@ -43,7 +59,6 @@ const createObject = function () {
 
 const NUMBER_OF_OBJECTS = 10;
 
-const createObjects = Array.from({ length: NUMBER_OF_OBJECTS }, createObject);
-console.log(createObjects);
+const createObjects = () => Array.from({ length: NUMBER_OF_OBJECTS }, createObject);
 
-export {createObjects};
+export { createObjects };
