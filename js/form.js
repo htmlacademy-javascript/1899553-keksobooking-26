@@ -102,7 +102,28 @@ function getCapacityErrorReport() {
 pristine.addValidator(roomNumber, validateCapacity);
 pristine.addValidator(capacityGuests, validateCapacity, getCapacityErrorReport);
 
+const timeIn = advertForm.querySelector('#timein');
+const timeOut = advertForm.querySelector('#timeout');
 
+timeIn.addEventListener('change', () => {
+  timeOut.value = timeIn.value;
+  pristine.validate();
+});
+
+timeOut.addEventListener('change', () => {
+  timeIn.value = timeOut.value;
+  pristine.validate();
+});
+
+function validateTime() {
+  return timeIn.value === timeOut.value;
+}
+
+pristine.addValidator(timeOut, validateTime);
+
+advertForm.addEventListener('submit', (evt) => {
+  if (!pristine.validate()) { evt.preventDefault(); }
+});
 
 advertForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
