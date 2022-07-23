@@ -3,6 +3,7 @@ const advertFormElements = advertForm.children;
 const mapFilterForm = document.querySelector('.map__filters');
 const mapFilterFormElements = mapFilterForm.children;
 
+// функция отлючения формы
 export const toInactiveForm = function () {
   advertForm.classList.add('ad-form--disabled');
   for (const element of advertFormElements) {
@@ -14,7 +15,7 @@ export const toInactiveForm = function () {
   }
 };
 
-
+// функция включения формы
 export const toActiveForm = function () {
   advertForm.classList.remove('ad-form--disabled');
   for (const element of advertFormElements) {
