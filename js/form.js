@@ -2,6 +2,7 @@ const advertForm = document.querySelector('.ad-form');
 const advertFormElements = advertForm.children;
 const mapFilterForm = document.querySelector('.map__filters');
 const mapFilterFormElements = mapFilterForm.children;
+const priceSlider = document.querySelector('.ad-form__slider');
 
 export const toInactiveForm = function () {
   advertForm.classList.add('ad-form--disabled');
