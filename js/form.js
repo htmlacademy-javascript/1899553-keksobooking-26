@@ -3,6 +3,7 @@ const advertFormElements = advertForm.children;
 const mapFilterForm = document.querySelector('.map__filters');
 const mapFilterFormElements = mapFilterForm.children;
 
+// функция отлючения формы
 export const toInactiveForm = function () {
   advertForm.classList.add('ad-form--disabled');
   for (const element of advertFormElements) {
@@ -14,7 +15,7 @@ export const toInactiveForm = function () {
   }
 };
 
-
+// функция включения формы
 export const toActiveForm = function () {
   advertForm.classList.remove('ad-form--disabled');
   for (const element of advertFormElements) {
@@ -102,7 +103,28 @@ function getCapacityErrorReport() {
 pristine.addValidator(roomNumber, validateCapacity);
 pristine.addValidator(capacityGuests, validateCapacity, getCapacityErrorReport);
 
+const timeIn = advertForm.querySelector('#timein');
+const timeOut = advertForm.querySelector('#timeout');
 
+timeIn.addEventListener('change', () => {
+  timeOut.value = timeIn.value;
+  pristine.validate();
+});
+
+timeOut.addEventListener('change', () => {
+  timeIn.value = timeOut.value;
+  pristine.validate();
+});
+
+function validateTime() {
+  return timeIn.value === timeOut.value;
+}
+
+pristine.addValidator(timeOut, validateTime);
+
+advertForm.addEventListener('submit', (evt) => {
+  if (!pristine.validate()) { evt.preventDefault(); }
+});
 
 advertForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
