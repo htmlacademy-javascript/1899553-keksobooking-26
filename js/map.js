@@ -13,15 +13,18 @@ const tokioLngDefault = 139.692;
 // const arrayOfObjects = createObjects();
 const scaleGlobal = 10;
 const scaleLocal = 18;
+const map = L.map('map-canvas');
 
-export const map = L.map('map-canvas')
-  .on('load', () => {
-    toActiveForm();
-  })
-  .setView({
-    lat: tokioLatDefault,
-    lng: tokioLngDefault,
-  }, scaleGlobal);
+const loadMap = (form) => {
+  map
+    .on('load', () => {
+      form(true);
+    })
+    .setView({
+      lat: tokioLatDefault,
+      lng: tokioLngDefault,
+    }, scaleGlobal);
+};
 
 const tiles = L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -63,7 +66,7 @@ mainMarker.on('moveend', (evt) => {
   document.querySelector('#address').value = `LatLng(${lat}, ${lng})`;
 });
 
-export const clearMarkers = () => {
+const clearMarkers = () => {
   markerGroup.clearLayers();
 };
 
@@ -77,7 +80,7 @@ resetButton.addEventListener('click', () => {
     lng: tokioLngDefault,
   }, scaleLocal);
   map.closePopup();
-  noticeForm.reset();
+  advertForm.reset();
   mapFilterForm.reset();
   previewAvatar.src = AVATAR_DEFAULT;
   previewPhoto.innerHTML = '';
@@ -101,9 +104,10 @@ const createMarker = (element) => {
     .bindPopup(drawObjects(element));
 };
 
-export const renderCards = (elements) => {
+const renderCards = (elements) => {
   elements.forEach((element) => {
     createMarker(element);
   });
 };
 
+export { renderCards, clearMarkers, loadMap };
