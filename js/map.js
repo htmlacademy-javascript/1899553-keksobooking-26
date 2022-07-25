@@ -1,14 +1,20 @@
-import { toActiveForm } from './form.js';
-import { createObjects } from './data.js';
+// import { toActiveForm } from './form.js';
+// import { createObjects } from './data.js';
 import { drawObjects } from './generator_card.js';
 const resetButton = document.querySelector('.ad-form__reset');
+const AVATAR_DEFAULT = 'img/muffin-grey.svg';
+const priceSlider = document.querySelector('.ad-form__slider');
+const previewPhoto = document.querySelector('.ad-form__photo');
+const previewAvatar = document.querySelector('.ad-form-header__avatar');
+const advertForm = document.querySelector('.ad-form');
+const mapFilterForm = document.querySelector('.map__filters');
 const tokioLatDefault = 35.6895;
 const tokioLngDefault = 139.692;
-const arrayOfObjects = createObjects();
+// const arrayOfObjects = createObjects();
 const scaleGlobal = 10;
 const scaleLocal = 18;
 
-const map = L.map('map-canvas')
+export const map = L.map('map-canvas')
   .on('load', () => {
     toActiveForm();
   })
@@ -57,6 +63,10 @@ mainMarker.on('moveend', (evt) => {
   document.querySelector('#address').value = `LatLng(${lat}, ${lng})`;
 });
 
+export const clearMarkers = () => {
+  markerGroup.clearLayers();
+};
+
 resetButton.addEventListener('click', () => {
   mainMarker.setLatLng({
     lat: tokioLatDefault,
@@ -66,16 +76,34 @@ resetButton.addEventListener('click', () => {
     lat: tokioLatDefault,
     lng: tokioLngDefault,
   }, scaleLocal);
+  map.closePopup();
+  noticeForm.reset();
+  mapFilterForm.reset();
+  previewAvatar.src = AVATAR_DEFAULT;
+  previewPhoto.innerHTML = '';
+  priceSlider.noUiSlider.reset();
+  clearMarkers();
 });
 
-cards.forEach((card, index) => {
+const markerGroup = L.layerGroup().addTo(map);
+
+const createMarker = (element) => {
   const marker = L.marker({
-    lat: arrayOfObjects[index].location.lat,
-    lng: arrayOfObjects[index].location.lng
+    lat: element.location.lat,
+    lng: element.location.lng
   },
     {
       icon: pinIcon,
     });
 
-  marker.addTo(map).bindPopup(drawObjects(cards));
-});
+  marker
+    .addTo(markerGroup)
+    .bindPopup(drawObjects(element));
+};
+
+export const renderCards = (elements) => {
+  elements.forEach((element) => {
+    createMarker(element);
+  });
+};
+

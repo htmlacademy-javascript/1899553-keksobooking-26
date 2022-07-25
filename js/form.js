@@ -1,8 +1,21 @@
+import {sendData} from './api.js'
+import {clearMarkers} from './map.js';
+
 const advertForm = document.querySelector('.ad-form');
 const advertFormElements = advertForm.children;
 const mapFilterForm = document.querySelector('.map__filters');
 const mapFilterFormElements = mapFilterForm.children;
+const AVATAR_DEFAULT = 'img/muffin-grey.svg';
+const previewAvatar = document.querySelector('.ad-form-header__avatar');
+const previewPhoto = document.querySelector('.ad-form__photo');
 const priceSlider = document.querySelector('.ad-form__slider');
+const onButtonSubmit = noticeForm.querySelector('.ad-form__submit');
+const success = document.querySelector('#success')
+  .content.querySelector('.success');
+const error = document.querySelector('#error')
+  .content.querySelector('.error');
+const buttonError = error.querySelector('.error__button');
+const body = document.querySelector('body');
 
 export const toInactiveForm = function () {
   advertForm.classList.add('ad-form--disabled');

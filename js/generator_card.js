@@ -1,4 +1,4 @@
-import { createObjects } from './data.js';
+// import { createObjects } from './data.js';
 
 const cardList = document.querySelector('#map-canvas');
 const pattern = document.querySelector('#card').content.querySelector('.popup');
