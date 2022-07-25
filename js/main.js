@@ -1,5 +1,4 @@
 import { drawObjects } from './generator_card.js';
-// import { createObjects } from './data.js';
 import { setUserFormSubmit, getSuccessReport, toActiveForm } from './form.js';
 import { renderCards, clearMarkers, loadMap } from './map.js';
 import { debounce } from './util.js';

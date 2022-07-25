@@ -1,5 +1,3 @@
-// import { toActiveForm } from './form.js';
-// import { createObjects } from './data.js';
 import { drawObjects } from './generator_card.js';
 const resetButton = document.querySelector('.ad-form__reset');
 const AVATAR_DEFAULT = 'img/muffin-grey.svg';
@@ -10,7 +8,6 @@ const advertForm = document.querySelector('.ad-form');
 const mapFilterForm = document.querySelector('.map__filters');
 const tokioLatDefault = 35.6895;
 const tokioLngDefault = 139.692;
-// const arrayOfObjects = createObjects();
 const scaleGlobal = 10;
 const scaleLocal = 18;
 const map = L.map('map-canvas');

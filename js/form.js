@@ -21,29 +21,8 @@ const error = document.querySelector('#error')
 const buttonError = error.querySelector('.error__button');
 const body = document.querySelector('body');
 
-// // функция отлючения формы
-// export const toInactiveForm = function () {
-//   advertForm.classList.add('ad-form--disabled');
-//   for (const element of advertFormElements) {
-//     element.disabled = true;
-//   }
-//   mapFilterForm.classList.add('map__filters--disabled');
-//   for (const element of mapFilterFormElements) {
-//     element.disabled = true;
-//   }
-// };
+// функция влючения формы
 
-// // функция включения формы
-// export const toActiveForm = function () {
-//   advertForm.classList.remove('ad-form--disabled');
-//   for (const element of advertFormElements) {
-//     element.disabled = false;
-//   }
-//   mapFilterForm.classList.remove('map__filters--disabled');
-//   for (const element of mapFilterFormElements) {
-//     element.disabled = false;
-//   }
-// };
 export const toActiveForm = (isActiveForm) => {
   if (isActiveForm) {
     advertForm.classList.remove('ad-form--disabled');
@@ -161,15 +140,6 @@ function validateTime() {
 }
 
 pristine.addValidator(timeOut, validateTime);
-
-// advertForm.addEventListener('submit', (evt) => {
-//   if (!pristine.validate()) { evt.preventDefault(); }
-// });
-
-// advertForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   pristine.validate();
-// });
 
 //слайдер
 noUiSlider.create(priceSlider, {
