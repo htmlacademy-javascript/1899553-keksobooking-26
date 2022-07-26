@@ -63,9 +63,6 @@ mainMarker.on('moveend', (evt) => {
   document.querySelector('#address').value = `LatLng(${lat}, ${lng})`;
 });
 
-const clearMarkers = () => {
-  markerGroup.clearLayers();
-};
 
 resetButton.addEventListener('click', () => {
   mainMarker.setLatLng({
@@ -99,6 +96,10 @@ const createMarker = (element) => {
   marker
     .addTo(markerGroup)
     .bindPopup(drawObjects(element));
+};
+
+const clearMarkers = () => {
+  markerGroup.clearLayers();
 };
 
 const renderCards = (elements) => {
