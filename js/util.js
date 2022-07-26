@@ -12,7 +12,7 @@ export const showAlert = (message) => {
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'pink';
 
-  alertContainer.textContent = message
+  alertContainer.textContent = message;
 
   document.body.append(alertContainer);
 
