@@ -64,23 +64,6 @@ mainMarker.on('moveend', (evt) => {
 });
 
 
-resetButton.addEventListener('click', () => {
-  mainMarker.setLatLng({
-    lat: tokioLatDefault,
-    lng: tokioLngDefault,
-  });
-  map.setView({
-    lat: tokioLatDefault,
-    lng: tokioLngDefault,
-  }, scaleLocal);
-  map.closePopup();
-  advertForm.reset();
-  mapFilterForm.reset();
-  previewAvatar.src = AVATAR_DEFAULT;
-  previewPhoto.innerHTML = '';
-  priceSlider.noUiSlider.reset();
-  clearMarkers();
-});
 
 const markerGroup = L.layerGroup().addTo(map);
 
@@ -101,6 +84,24 @@ const createMarker = (element) => {
 const clearMarkers = () => {
   markerGroup.clearLayers();
 };
+
+resetButton.addEventListener('click', () => {
+  mainMarker.setLatLng({
+    lat: tokioLatDefault,
+    lng: tokioLngDefault,
+  });
+  map.setView({
+    lat: tokioLatDefault,
+    lng: tokioLngDefault,
+  }, scaleLocal);
+  map.closePopup();
+  advertForm.reset();
+  mapFilterForm.reset();
+  previewAvatar.src = AVATAR_DEFAULT;
+  previewPhoto.innerHTML = '';
+  priceSlider.noUiSlider.reset();
+  clearMarkers();
+});
 
 const renderCards = (elements) => {
   elements.forEach((element) => {
