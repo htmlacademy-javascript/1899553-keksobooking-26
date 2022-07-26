@@ -63,8 +63,6 @@ mainMarker.on('moveend', (evt) => {
   document.querySelector('#address').value = `LatLng(${lat}, ${lng})`;
 });
 
-
-
 const markerGroup = L.layerGroup().addTo(map);
 
 const createMarker = (element) => {
@@ -72,9 +70,9 @@ const createMarker = (element) => {
     lat: element.location.lat,
     lng: element.location.lng
   },
-    {
-      icon: pinIcon,
-    });
+  {
+    icon: pinIcon,
+  });
 
   marker
     .addTo(markerGroup)
