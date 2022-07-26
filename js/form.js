@@ -1,56 +1,38 @@
-import {sendData} from './api.js'
-import {clearMarkers} from './map.js';
-
 const advertForm = document.querySelector('.ad-form');
 const advertFormElements = advertForm.children;
 const mapFilterForm = document.querySelector('.map__filters');
 const mapFilterFormElements = mapFilterForm.children;
 
-const AVATAR_DEFAULT = 'img/muffin-grey.svg';
-const previewAvatar = document.querySelector('.ad-form-header__avatar');
-const previewPhoto = document.querySelector('.ad-form__photo');
-
-const price = advertForm.querySelector('#price');
-const typeOfHousing = document.querySelector('#type');
-const priceSlider = document.querySelector('.ad-form__slider');
-const onButtonSubmit = advertForm.querySelector('.ad-form__submit');
-const success = document.querySelector('#success')
-  .content.querySelector('.success');
-const error = document.querySelector('#error')
-  .content.querySelector('.error');
-const buttonError = error.querySelector('.error__button');
-const body = document.querySelector('body');
-
-// функция влючения формы
-
-export const toActiveForm = (isActiveForm) => {
-  if (isActiveForm) {
-    advertForm.classList.remove('ad-form--disabled');
-    for (const element of advertFormElements) {
-      element.disabled = false;
-    }
-    mapFilterForm.classList.remove('map__filters--disabled');
-    for (const element of mapFilterFormElements) {
-      element.disabled = false;
-    }
-  } else {
-    advertForm.classList.add('ad-form--disabled');
-    for (const element of advertFormElements) {
-      element.disabled = true;
-    }
-    mapFilterForm.classList.add('map__filters--disabled');
-    for (const element of mapFilterFormElements) {
-      element.disabled = true;
-    }
+// функция отлючения формы
+export const toInactiveForm = function () {
+  advertForm.classList.add('ad-form--disabled');
+  for (const element of advertFormElements) {
+    element.disabled = true;
+  }
+  mapFilterForm.classList.add('map__filters--disabled');
+  for (const element of mapFilterFormElements) {
+    element.disabled = true;
   }
 };
+
+// функция включения формы
+export const toActiveForm = function () {
+  advertForm.classList.remove('ad-form--disabled');
+  for (const element of advertFormElements) {
+    element.disabled = false;
+  }
+  mapFilterForm.classList.remove('map__filters--disabled');
+  for (const element of mapFilterFormElements) {
+    element.disabled = false;
+  }
+};
+
 const pristine = new Pristine(advertForm, {
   classTo: 'ad-form__element',
   errorTextParent: 'ad-form__element',
   errorTextClass: 'ad-form__error-text',
 });
 
-//проверка валидности "Заголовок объявления"
 function validateTitleNotice(value) {
   return value.length >= 30 && value.length <= 100;
 }
@@ -58,6 +40,8 @@ function validateTitleNotice(value) {
 pristine.addValidator(advertForm.querySelector('#title'), validateTitleNotice, 'Объявление от 30 до 100 символов');
 
 
+const price = advertForm.querySelector('#price');
+const typeOfHousing = document.querySelector('#type');
 const typeOfHousingPrice = {
   palace: 10000,
   flat: 1000,
@@ -73,7 +57,6 @@ const maxPrice = {
   hotel: 100000
 };
 
-//проверка валидности "Тип жилья and Цена за ночь, руб."
 typeOfHousing.addEventListener('change', () => {
   price.placeholder = typeOfHousingPrice[typeOfHousing.value];
   price.min = typeOfHousingPrice[typeOfHousing.value];
@@ -98,7 +81,6 @@ const possibleCapacity = {
   '100': ['0']
 };
 
-//проверка валидности "Количество комнат и количество мест"
 function validateCapacity() {
   return possibleCapacity[roomNumber.value].includes(capacityGuests.value);
 }
@@ -124,7 +106,6 @@ pristine.addValidator(capacityGuests, validateCapacity, getCapacityErrorReport);
 const timeIn = advertForm.querySelector('#timein');
 const timeOut = advertForm.querySelector('#timeout');
 
-// Время заезда/выезда
 timeIn.addEventListener('change', () => {
   timeOut.value = timeIn.value;
   pristine.validate();
@@ -141,69 +122,11 @@ function validateTime() {
 
 pristine.addValidator(timeOut, validateTime);
 
-//слайдер
-noUiSlider.create(priceSlider, {
-  range: {
-    min:Number(price.min),
-    max:Number(price.max),
-  },
-  start:Number(price.placeholder),
-  step:10,
-  connect:'upper',
+advertForm.addEventListener('submit', (evt) => {
+  if (!pristine.validate()) { evt.preventDefault(); }
 });
-priceSlider.noUiSlider.on('slide', () => {
-  price.value = Number(priceSlider.noUiSlider.get());
+
+advertForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
   pristine.validate();
 });
-price.addEventListener('change', (evt) => {
-  priceSlider.noUiSlider.set(Number(evt.target.value));
-});
-
-//функция об успешной отправке
-export const getSuccessReport = () => {
-  const successReport = success.cloneNode(true);
-  body.appendChild(successReport);
-  document.addEventListener('click', () => {
-    successReport.remove();
-  });
-  document.addEventListener('keydown',(evt) => {
-    if (evt.key === 'Escape') {
-      successReport.remove();
-    }
-  });
-  advertForm.reset();
-  mapFilterForm.reset();
-  previewAvatar.src = AVATAR_DEFAULT;
-  previewPhoto.innerHTML = '';
-  onButtonSubmit.disabled = false;
-  priceSlider.noUiSlider.reset();
-  clearMarkers();
-};
-//функция об НЕуспешной отправке
-const getErrorReport = () => {
-  const errorReport = error.cloneNode(true);
-  body.appendChild(errorReport);
-  document.addEventListener('click', () => {
-    errorReport.remove();
-  });
-  document.addEventListener('keydown',(evt) => {
-    if (evt.key === 'Escape') {
-      errorReport.remove();
-    }
-  });
-  buttonError.querySelector('click', () => {
-    errorReport.remove();
-  });
-  onButtonSubmit.disabled = false;
-};
-
-export const setUserFormSubmit = (onSuccess) => {
-  advertForm.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate();
-    if (isValid) {
-      onButtonSubmit.disabled = true;
-      sendData(() => onSuccess(),getErrorReport,new FormData(evt.target),);
-    }
-  });
-};
