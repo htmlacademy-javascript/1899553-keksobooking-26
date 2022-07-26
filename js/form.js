@@ -1,4 +1,4 @@
-import {sendData} from './api.js'
+import {sendData} from './api.js';
 import {clearMarkers} from './map.js';
 
 const advertForm = document.querySelector('.ad-form');

@@ -42,4 +42,4 @@ export const drawObjects = (cards) => {
     cardtemplate.querySelector('.popup__avatar').src = card.author.avatar;
     cardList.appendChild(cardtemplate);
   });
-}
+};
