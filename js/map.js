@@ -82,9 +82,9 @@ const createMarker = (element) => {
     lat: element.location.lat,
     lng: element.location.lng
   },
-    {
-      icon: pinIcon,
-    });
+  {
+    icon: pinIcon,
+  });
 
   marker
     .addTo(markerGroup)
