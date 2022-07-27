@@ -1,8 +1,8 @@
 import './generator_card.js';
-import { setUserFormSubmit, getSuccessReport, toActiveForm } from './form.js';
+import { toActiveForm, getSuccessReport, setUserFormSubmit } from './form.js';
 import { renderCards, clearMarkers, loadMap } from './map.js';
 import { debounce } from './util.js';
-import { loadFileAvatar, loadFilePhoto } from './avatar.js';
+import { loadMedia } from './avatar.js';
 import { toFilteredMap } from './filter.js';
 import { getData } from './api.js';
 
@@ -22,5 +22,4 @@ getData((data) => {
 });
 
 setUserFormSubmit(getSuccessReport);
-loadFileAvatar();
-loadFilePhoto();
+loadMedia();

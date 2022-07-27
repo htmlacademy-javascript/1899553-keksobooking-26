@@ -1,11 +1,12 @@
-import {showAlert} from './util.js';
+import { showAlert } from './util.js';
+
 export const getData = (onSuccess) => {
   fetch('https://26.javascript.pages.academy/keksobooking/data')
-    .then((response)=>response.json())
-    .then((data)=>{
+    .then((response) => response.json())
+    .then((data) => {
       onSuccess(data);
     })
-    .catch(()=>{
+    .catch(() => {
       showAlert('Что то пошло не так');
     });
 };
@@ -25,7 +26,7 @@ export const sendData = (onSuccess, onFail, body) => {
         onFail();
       }
     })
-    .catch(()=>{
+    .catch(() => {
       onFail();
     });
 };
