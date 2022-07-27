@@ -29,9 +29,9 @@ export const toFilteredMap = (data) => {
       return mapFilterFeatures.length === 0;
     }
   };
-  return (mapFilterType.value === VALUE_DEFAULT||data.offer.type === mapFilterType.value)&&
-  (mapFilterPrice.value === VALUE_DEFAULT||(data.offer.price >= priceRange[mapFilterPrice.value].min && data.offer.price <= priceRange[mapFilterPrice.value].max))&&
-  (mapFilterRooms.value === VALUE_DEFAULT||data.offer.rooms === Number(mapFilterRooms.value))&&
-  (mapFilterGuests.value === VALUE_DEFAULT||data.offer.guests === Number(mapFilterGuests.value))&&
-  toFilterFeatures(data,mapFilterFeatures);
+  return (mapFilterType.value === VALUE_DEFAULT || data.offer.type === mapFilterType.value) &&
+    (mapFilterPrice.value === VALUE_DEFAULT || (data.offer.price >= priceRange[mapFilterPrice.value].min && data.offer.price <= priceRange[mapFilterPrice.value].max)) &&
+    (mapFilterRooms.value === VALUE_DEFAULT || data.offer.rooms === Number(mapFilterRooms.value)) &&
+    (mapFilterGuests.value === VALUE_DEFAULT || data.offer.guests === Number(mapFilterGuests.value)) &&
+    toFilterFeatures(data, mapFilterFeatures);
 };
