@@ -28,4 +28,4 @@ export const debounce = (callback, timeoutDelay = DEFAULT_DELAY) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
