@@ -2,16 +2,14 @@ import {sendData} from './api.js';
 import {clearMarkers, renderCards} from './map.js';
 import {getData} from './api.js';
 
+const AVATAR_DEFAULT = 'img/muffin-grey.svg';
 const advertForm = document.querySelector('.ad-form');
+const VALUE_OF_OBJECT = 10;
 const advertFormElements = advertForm.children;
 const mapFilterForm = document.querySelector('.map__filters');
 const mapFilterFormElements = mapFilterForm.children;
-
-const AVATAR_DEFAULT = 'img/muffin-grey.svg';
 const previewAvatar = document.querySelector('.ad-form-header__avatar');
 const previewPhoto = document.querySelector('.ad-form__photo');
-
-
 const price = advertForm.querySelector('#price');
 const typeOfHousing = document.querySelector('#type');
 const priceSlider = document.querySelector('.ad-form__slider');
@@ -22,7 +20,6 @@ const error = document.querySelector('#error')
   .content.querySelector('.error');
 const buttonError = error.querySelector('.error__button');
 const body = document.querySelector('body');
-const VALUE_OF_OBJECT = 10;
 const typeOfHousingPrice = {
   palace: 10000,
   flat: 1000,

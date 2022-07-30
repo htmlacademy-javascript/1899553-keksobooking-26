@@ -7,9 +7,9 @@ import { toFilteredMap } from './filter.js';
 import { getData } from './api.js';
 
 
-const mapFilters = document.querySelector('.map__filters');
 const RERENDER_DELAY = 500;
 const VALUE_OF_OBJECT = 10;
+const mapFilters = document.querySelector('.map__filters');
 toActiveForm(false);
 loadMap(toActiveForm);
 

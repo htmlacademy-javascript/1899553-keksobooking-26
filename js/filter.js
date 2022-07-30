@@ -1,9 +1,9 @@
+const VALUE_DEFAULT = 'any';
 const mapFilters = document.querySelector('.map__filters');
 const mapFilterType = mapFilters.querySelector('#housing-type');
 const mapFilterPrice = mapFilters.querySelector('#housing-price');
 const mapFilterRooms = mapFilters.querySelector('#housing-rooms');
 const mapFilterGuests = mapFilters.querySelector('#housing-guests');
-const VALUE_DEFAULT = 'any';
 const priceRange = {
   low: {
     min: 0,
