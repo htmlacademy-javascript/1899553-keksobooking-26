@@ -1,7 +1,12 @@
 import { drawObjects } from './generator_card.js';
 import { getData } from './api.js';
-const resetButton = document.querySelector('.ad-form__reset');
 const AVATAR_DEFAULT = 'img/muffin-grey.svg';
+const LAT_DEFAULT = 35.68951;
+const LNG_DEFAULT = 139.69201;
+const SCALE_GLOBAL = 10;
+const SCALE_LOCAL = 18;
+const VALUE_OF_OBJECT = 10;
+const resetButton = document.querySelector('.ad-form__reset');
 const priceSlider = document.querySelector('.ad-form__slider');
 const previewPhoto = document.querySelector('.ad-form__photo');
 const previewAvatar = document.querySelector('.ad-form-header__avatar');
@@ -9,11 +14,6 @@ const advertForm = document.querySelector('.ad-form');
 const mapFilterForm = document.querySelector('.map__filters');
 const price = advertForm.querySelector('#price');
 const typeOfHousing = document.querySelector('#type');
-const LAT_DEFAULT = 35.68951;
-const LNG_DEFAULT = 139.69201;
-const SCALE_GLOBAL = 10;
-const SCALE_LOCAL = 18;
-const VALUE_OF_OBJECT = 10;
 const map = L.map('map-canvas');
 const typeOfHousingPrice = {
   palace: 10000,

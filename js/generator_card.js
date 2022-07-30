@@ -1,3 +1,6 @@
+const PHOTO_WIDTH = 45;
+const PHOTO_HEIGHT = 40;
+
 const pattern = document.querySelector('#card').content.querySelector('.popup');
 const TypeOfHousing = {
   'flat': 'Квартира',
@@ -16,15 +19,15 @@ export const drawObjects = (cards) => {
   const photos = cardTemplate.querySelector('.popup__photos');
   const photo = photos.querySelector('.popup__photo');
   if (!photosRandom) {
-    photo.remove();
+    photos.remove();
   }
   else {
-    photo.remove();
+    photos.remove();
     photosRandom.forEach((picture) => {
       const photoClone = photo.cloneNode();
       photoClone.src = picture;
-      photoClone.width = 45;
-      photoClone.height = 40;
+      photoClone.width = PHOTO_WIDTH;
+      photoClone.height = PHOTO_HEIGHT;
       photoClone.alt = 'Фотография жилья';
       photos.appendChild(photoClone);
     });
@@ -42,13 +45,19 @@ export const drawObjects = (cards) => {
       }
     });
   }
+  if (cards.offer.description) {
+    cardTemplate.querySelector('.popup__description').textContent = cards.offer.description;
+  }
+  else {
+    cardTemplate.querySelector('.popup__description').remove();
+  }
+
   cardTemplate.querySelector('.popup__title').textContent = cards.offer.title;
   cardTemplate.querySelector('.popup__text--address').textContent = cards.offer.address;
   cardTemplate.querySelector('.popup__text--price').textContent = `${cards.offer.price} ₽/ночь`;
   cardTemplate.querySelector('.popup__type').textContent = TypeOfHousing[cards.offer.type];
   cardTemplate.querySelector('.popup__text--capacity').textContent = `${cards.offer.rooms} комнаты для ${cards.offer.guests} гостей`;
   cardTemplate.querySelector('.popup__text--time').textContent = `Заезд после ${cards.offer.checkin}, выезд до ${cards.offer.checkout}`;
-  cardTemplate.querySelector('.popup__description').textContent = cards.offer.description;
   cardTemplate.querySelector('.popup__avatar').src = cards.author.avatar;
   return cardTemplate;
 };

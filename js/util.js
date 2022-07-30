@@ -1,4 +1,5 @@
 const ALERT_SHOW_TIME = 3000;
+const DEFAULT_DELAY = 500;
 
 export const showAlert = (message) => {
   const alertContainer = document.createElement('div');
@@ -21,11 +22,10 @@ export const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export function debounce (callback, timeoutDelay = 500) {
+export const debounce = (callback, timeoutDelay = DEFAULT_DELAY) => {
   let timeoutId;
-
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
