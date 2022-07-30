@@ -5,9 +5,9 @@ import {getData} from './api.js';
 const AVATAR_DEFAULT = 'img/muffin-grey.svg';
 const advertForm = document.querySelector('.ad-form');
 const VALUE_OF_OBJECT = 10;
-const advertFormElements = advertForm.children;
+const advertFormChildren = advertForm.children;
 const mapFilterForm = document.querySelector('.map__filters');
-const mapFilterFormElements = mapFilterForm.children;
+const mapFilterFormChildren = mapFilterForm.children;
 const previewAvatar = document.querySelector('.ad-form-header__avatar');
 const previewPhoto = document.querySelector('.ad-form__photo');
 const price = advertForm.querySelector('#price');
@@ -120,24 +120,31 @@ pristine.addValidator(timeOut, validateTime);
 const toActiveForm = (isActiveForm) => {
   if (isActiveForm) {
     advertForm.classList.remove('ad-form--disabled');
-    for (const element of advertFormElements) {
-      element.disabled = false;
-    }
-    mapFilterForm.classList.remove('map__filters--disabled');
-    for (const element of mapFilterFormElements) {
+    for (const element of advertFormChildren) {
       element.disabled = false;
     }
   } else {
     advertForm.classList.add('ad-form--disabled');
-    for (const element of advertFormElements) {
-      element.disabled = true;
-    }
-    mapFilterForm.classList.add('map__filters--disabled');
-    for (const element of mapFilterFormElements) {
+    for (const element of advertFormChildren) {
       element.disabled = true;
     }
   }
 };
+
+const toActiveFilter = (isActiveFilter) => {
+  if (isActiveFilter) {
+    mapFilterForm.classList.remove('map__filters--disabled');
+    for (const element of mapFilterFormChildren) {
+      element.disabled = false;
+    }
+  } else {
+    mapFilterForm.classList.add('map__filters--disabled');
+    for (const element of mapFilterFormChildren) {
+      element.disabled = true;
+    }
+  }
+};
+
 //слайдер
 noUiSlider.create(priceSlider, {
   range: {
@@ -192,7 +199,7 @@ const getErrorReport = () => {
       errorReport.remove();
     }
   });
-  buttonError.querySelector('click', () => {
+  buttonError.addEventListener('click', () => {
     errorReport.remove();
   });
   onButtonSubmit.disabled = false;
@@ -224,6 +231,6 @@ const setUserFormSubmit = (onSuccess) => {
     }
   });
 };
-export {toActiveForm, setUserFormSubmit, getSuccessReport};
+export {toActiveForm, toActiveFilter, setUserFormSubmit, getSuccessReport};
 
 
